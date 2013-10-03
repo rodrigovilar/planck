@@ -1,0 +1,8 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-03 11:32:57
+project --topLevelPackage br.ufpb.dce.planck --projectName Planck --java 7 --packaging JAR
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-10-03 11:33:21
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-10-03 11:33:36
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+// [failed] entity jpa --class br.ufpb.dce.planck.model.User --testAutomatically 
+entity jpa --class br.ufpb.dce.planck.model.Person --testAutomatically 
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-10-03 11:38:36
