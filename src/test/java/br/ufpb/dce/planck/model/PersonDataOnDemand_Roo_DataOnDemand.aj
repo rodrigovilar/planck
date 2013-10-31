@@ -24,7 +24,28 @@ privileged aspect PersonDataOnDemand_Roo_DataOnDemand {
     
     public Person PersonDataOnDemand.getNewTransientPerson(int index) {
         Person obj = new Person();
+        setEmail(obj, index);
+        setFullname(obj, index);
+        setPassword(obj, index);
         return obj;
+    }
+    
+    public void PersonDataOnDemand.setEmail(Person obj, int index) {
+        String email = "foo" + index + "@bar.com";
+        obj.setEmail(email);
+    }
+    
+    public void PersonDataOnDemand.setFullname(Person obj, int index) {
+        String fullname = "fullname_" + index;
+        obj.setFullname(fullname);
+    }
+    
+    public void PersonDataOnDemand.setPassword(Person obj, int index) {
+        String password = "password_" + index;
+        if (password.length() > 20) {
+            password = password.substring(0, 20);
+        }
+        obj.setPassword(password);
     }
     
     public Person PersonDataOnDemand.getSpecificPerson(int index) {
@@ -67,13 +88,13 @@ privileged aspect PersonDataOnDemand_Roo_DataOnDemand {
             Person obj = getNewTransientPerson(i);
             try {
                 obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
+            } catch (final ConstraintViolationException e) {
+                final StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                    final ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
                 }
-                throw new RuntimeException(msg.toString(), e);
+                throw new IllegalStateException(msg.toString(), e);
             }
             obj.flush();
             data.add(obj);

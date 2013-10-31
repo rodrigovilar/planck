@@ -6,3 +6,12 @@ jpa setup --database H2_IN_MEMORY --provider HIBERNATE
 // [failed] entity jpa --class br.ufpb.dce.planck.model.User --testAutomatically 
 entity jpa --class br.ufpb.dce.planck.model.Person --testAutomatically 
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2013-10-03 11:38:36
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 13:46:46
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-31 13:47:47
+focus --class ~.model.Person
+field string --fieldName fullname --notNull 
+field string --fieldName email --unique --notNull 
+field string --fieldName password --sizeMax 20 --sizeMin 6 --notNull 
+json all
+web mvc json setup
+web mvc json all 
