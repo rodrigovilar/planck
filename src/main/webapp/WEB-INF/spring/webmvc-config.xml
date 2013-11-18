@@ -9,5 +9,6 @@
     <!-- Turns on support for mapping requests to Spring MVC @Controller methods
          Also registers default Formatters and Validators for use across all @Controllers -->
     <mvc:annotation-driven/>
+
     
 </beans>

@@ -4,6 +4,7 @@
 package br.ufpb.dce.planck.model;
 
 import br.ufpb.dce.planck.model.Person;
+import java.util.Calendar;
 
 privileged aspect Person_Roo_JavaBean {
     
@@ -21,6 +22,14 @@ privileged aspect Person_Roo_JavaBean {
     
     public void Person.setEmail(String email) {
         this.email = email;
+    }
+    
+    public Calendar Person.getBirthdate() {
+        return this.birthdate;
+    }
+    
+    public void Person.setBirthdate(Calendar birthdate) {
+        this.birthdate = birthdate;
     }
     
     public String Person.getPassword() {
