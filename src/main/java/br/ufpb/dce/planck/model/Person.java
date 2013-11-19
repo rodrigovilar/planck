@@ -74,11 +74,14 @@ public class Person {
     	noPerson.put("fullname", person.getFullname());
     	noPerson.put("email", person.getEmail());
     	noPerson.put("password", person.getPassword());
-    	StringBuilder strBuilder = new StringBuilder();
-		strBuilder.append(person.getBirthdate().get(Calendar.DATE) + "/");
-		strBuilder.append(getMonthName((person.getBirthdate().get(Calendar.MONTH))) + "/");
-		strBuilder.append(person.getBirthdate().get(Calendar.YEAR));
-		noPerson.put("birthday", strBuilder.toString());
+
+    	if (person.getBirthdate() != null) {
+    		StringBuilder strBuilder = new StringBuilder();
+    		strBuilder.append(person.getBirthdate().get(Calendar.DATE) + "/");
+    		strBuilder.append(getMonthName((person.getBirthdate().get(Calendar.MONTH))) + "/");
+    		strBuilder.append(person.getBirthdate().get(Calendar.YEAR));
+    		noPerson.put("birthday", strBuilder.toString());
+    	}
     	
 		return noPerson;
     	
