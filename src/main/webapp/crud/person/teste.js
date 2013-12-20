@@ -4,11 +4,11 @@ $(document).ready(function(){
 
 function READ(){
 
-	alert("Anderson");
+	alert("Post test");
 
 	$.ajax({
 		type: "POST",
-		url: "http://localhost:8080/Planck/people",
+		url: "http://localhost:8080/Planck/api/people",
 		data: BUILDJSON(),
 		dataType: "json",
 		contentType:  "application/json",
@@ -20,13 +20,11 @@ function READ(){
 			alert("People created successfully");
 			}
 	});
-
 };
 
 function BUILDJSON(){
 	
-	
-	var the_json = '{fullname":"anderson", "birthdate":"Nov 21, 2013", "email":"anderson.alves@dce.ufpb", "password":"1234567"}';
+	var the_json = '{"fullname":"andersoon", "birthdate":"29-11-1999", "email":"andersoon.alves@dce.ufpb", "password":"1234567"}';
 
 	return the_json;
 };

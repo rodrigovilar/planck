@@ -27,3 +27,38 @@ perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-11 21:52:29
 // Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2013-11-18 21:17:37
 jpa setup --database MYSQL --provider HIBERNATE 
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-03 11:28:46
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-03 19:02:22
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-07 21:59:30
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-19 09:37:03
+hint
+hint entities
+entity jpa --class ~.model.Document
+focus --class ~.model.Person
+field set --fieldName document --type ~.model.Document --class ~.model.Person
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-20 02:39:02
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-20 02:39:33
+field set --fieldName document --type ~.model.Document --class ~.model.Person --cardinality ONE_TO_MANY 
+focus --class ~.model.Document
+field reference --fieldName person --type ~.model.Person --class ~.model.Document --notNull 
+// [failed] field reference --fieldName person --type ~.model.Person --class ~.model.Document
+focus --class ~.model.Person
+perform test
+exit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-20 03:41:51
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-20 03:42:03
+entity jpa --class ~.model.Document
+field reference --fieldName person --type ~.model.Person 
+focus --class ~.model.Person
+field set --fieldName documents --type ~.model.Document --cardinality ONE_TO_MANY 
+focus --class ~.model.Document
+field string --fieldName type --notNull 
+field string --fieldName title --notNull 
+// [failed] field string --fieldName abstract --notNull 
+field string --fieldName summary --notNull 
+field string --fieldName authors --notNull 
+field string --fieldName path_to_file --notNull 
+// [failed] field number --type java.lang.Integer --fieldName year --notNull 
+// [failed] field number --type java.lang.Integer --fieldName Year --notNull 
+field number --type java.lang.Integer --fieldName yearr --notNull 

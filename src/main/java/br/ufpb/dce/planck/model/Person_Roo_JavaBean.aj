@@ -3,8 +3,10 @@
 
 package br.ufpb.dce.planck.model;
 
+import br.ufpb.dce.planck.model.Document;
 import br.ufpb.dce.planck.model.Person;
 import java.util.Calendar;
+import java.util.Set;
 
 privileged aspect Person_Roo_JavaBean {
     
@@ -24,12 +26,12 @@ privileged aspect Person_Roo_JavaBean {
         this.email = email;
     }
     
-    public Calendar Person.getBirthdate() {
-        return this.birthdate;
+    public Calendar Person.getBirthday() {
+        return this.birthday;
     }
     
-    public void Person.setBirthdate(Calendar birthdate) {
-        this.birthdate = birthdate;
+    public void Person.setBirthday(Calendar birthday) {
+        this.birthday = birthday;
     }
     
     public String Person.getPassword() {
@@ -38,6 +40,14 @@ privileged aspect Person_Roo_JavaBean {
     
     public void Person.setPassword(String password) {
         this.password = password;
+    }
+    
+    public Set<Document> Person.getDocuments() {
+        return this.documents;
+    }
+    
+    public void Person.setDocuments(Set<Document> documents) {
+        this.documents = documents;
     }
     
 }

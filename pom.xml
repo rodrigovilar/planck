@@ -50,10 +50,21 @@
     </pluginRepositories>
     <dependencies>
         <!-- General dependencies for standard applications -->
+          <dependency>
+                        <groupId>org.apache.httpcomponents</groupId>
+                        <artifactId>httpclient</artifactId>
+                        <version>4.3.1</version>
+               </dependency>        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nanuvem</groupId>
+            <artifactId>restest</artifactId>
+            <version>0.0.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>

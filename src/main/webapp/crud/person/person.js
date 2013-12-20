@@ -1,7 +1,7 @@
 /*
 * Planck - People - Crud
 */
-var entity = "people";// O string referente a entidade fica armazenado em uma variável global.
+var entity = "api/people";// O string referente a entidade fica armazenado em uma variável global.
 var global_id = " "; // O valor do ID atual fica armazenado em uma variável global.
 var get_version = " "; // O valor do version atual fica armazenado em uma variável global.
 var action; // Responsável por definir se o parâmetro action irá chamar CREATE ou UPDATE.
@@ -13,7 +13,10 @@ $(document).ready(function(){
 
 function READ(){
 
-	$.getJSON("http://localhost:8080/Planck/"+ entity, function(){
+	ifExistRemove("#list_table");
+	ifExistRemove("#form");
+
+	$.getJSON("http://localhost:8080/Planck/"+ entity, function(json){
 
 		var $div = $('<div/>').appendTo('body');
 		$div.attr('id','list');
@@ -24,12 +27,12 @@ function READ(){
 			var title = '<tr><td colspan="8"><a href="#" onclick="buildForm(1);"><img src="../images/create.png"/>Add</a></td></tr>';
 			table.append(title);
 
-			var header = '<tr><th>ID</th><th>FullName</th><th>E-mail</th><th>BirthDate</th><th>Password</th><th>Edit</th><th>Delete</th></tr>';
+			var header = '<tr><th>ID</th><th>FullName</th><th>E-mail</th><th>birthday</th><th>Password</th><th>Edit</th><th>Delete</th></tr>';
 			table.append(header);
 
 			for (i=0; i < json.length; i++){
-			    var row = '<tr><td>' + json[i].id + '</td><td>' + json[i].fullname + '</td><td>' + json[i].email +'</td><td>' + 
-			    		'</td><td>' + json[i].birthdate +'</td><td>' + json[i].password + 
+			    var row = '<tr><td>' + json[i].id + '</td><td>' + json[i].fullname + '</td><td>' + json[i].email +'</td><td>'
+			    			 + json[i].birthday +'</td><td>' + json[i].password + 
 			    		  '</td><td><a href="#" onclick="fillForm(' + json[i].id + ');"><img src="../images/update.png"/></a>' +
 			    		  '</td><td><a href="#" onclick="DELETE(' + json[i].id + ');"><img src="../images/delete.png"/></a>' +
 			    		  '</td></tr>';
@@ -59,9 +62,11 @@ function BUILDJSON(){
 	}
 
 	var the_json = '{' + id + version + '"fullname":"'+ $('input[name="fullname"]').val() +
-	'", "birthdate":"'+ $('input[name="birthdate"]').val() +
+	'", "birthday":"'+ $('input[name="birthday"]').val() +
 	'", "email":"'+ $('input[name="email"]').val() +
 	'", "password":"'+ $('input[name="password"]').val() +'"}';
+
+	console.log(the_json);
 
 	return the_json;
 };
@@ -88,7 +93,7 @@ function CREATE(){
 function UPDATE(){
 	$.ajax({
 		type: "PUT",
-		url: "http://localhost:8080/Planck/"+ entity,
+		url: "http://localhost:8080/Planck/"+ entity + "/" + global_id,
 		data: BUILDJSON(),
 		dataType: "json",
 		contentType: "application/json",
@@ -101,7 +106,7 @@ function UPDATE(){
 			READ();
 		}
 	});
-};
+}
 
 function DELETE(id){
 
@@ -139,10 +144,10 @@ function buildForm(type){
 	var form = $('<form action="'+action+'"><br>' +
 					 '<spam><strong>Form Person</strong></spam><br>' +
 					 '<input name="fullname" type="text" placeholder="FullName" /><br>' +
-					 '<input name="birthdate" type="text" placeholder="BirthDate" /><br>' +
-					 '<input name="emai" type="text" placeholder="E-mail" /><br>' +
+					 '<input name="birthday" type="text" placeholder="birthday" /><br>' +
+					 '<input name="email" type="text" placeholder="E-mail" /><br>' +
 					 '<input name="password" type="text" placeholder="password" /><br>' +
-					 '<input value="'+submit_button+'" type="submit" />' +
+					 '<input value="'+submit_button+'" type="submit"/>' +
 				 '</form>');
 
 	$("#form").append(form);
@@ -161,7 +166,7 @@ function fillForm(id){
 		function(json){
 
 			$("input[name='fullname']").val(json.fullname);
-			$("input[name='birthdate']").val(json.birthdate);
+			$("input[name='birthday']").val(json.birthday);
 			$("input[name='email']").val(json.email);
 			$("input[name='password']").val(json.password);
 

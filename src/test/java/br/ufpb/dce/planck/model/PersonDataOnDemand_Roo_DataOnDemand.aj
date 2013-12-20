@@ -26,16 +26,16 @@ privileged aspect PersonDataOnDemand_Roo_DataOnDemand {
     
     public Person PersonDataOnDemand.getNewTransientPerson(int index) {
         Person obj = new Person();
-        setBirthdate(obj, index);
+        setBirthday(obj, index);
         setEmail(obj, index);
         setFullname(obj, index);
         setPassword(obj, index);
         return obj;
     }
     
-    public void PersonDataOnDemand.setBirthdate(Person obj, int index) {
-        Calendar birthdate = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1);
-        obj.setBirthdate(birthdate);
+    public void PersonDataOnDemand.setBirthday(Person obj, int index) {
+        Calendar birthday = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR), Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - 1);
+        obj.setBirthday(birthday);
     }
     
     public void PersonDataOnDemand.setEmail(Person obj, int index) {
@@ -96,13 +96,13 @@ privileged aspect PersonDataOnDemand_Roo_DataOnDemand {
             Person obj = getNewTransientPerson(i);
             try {
                 obj.persist();
-            } catch (ConstraintViolationException e) {
-                StringBuilder msg = new StringBuilder();
+            } catch (final ConstraintViolationException e) {
+                final StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
-                    ConstraintViolation<?> cv = iter.next();
-                    msg.append("[").append(cv.getConstraintDescriptor()).append(":").append(cv.getMessage()).append("=").append(cv.getInvalidValue()).append("]");
+                    final ConstraintViolation<?> cv = iter.next();
+                    msg.append("[").append(cv.getRootBean().getClass().getName()).append(".").append(cv.getPropertyPath()).append(": ").append(cv.getMessage()).append(" (invalid value = ").append(cv.getInvalidValue()).append(")").append("]");
                 }
-                throw new RuntimeException(msg.toString(), e);
+                throw new IllegalStateException(msg.toString(), e);
             }
             obj.flush();
             data.add(obj);
