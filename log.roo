@@ -62,3 +62,15 @@ field string --fieldName path_to_file --notNull
 // [failed] field number --type java.lang.Integer --fieldName year --notNull 
 // [failed] field number --type java.lang.Integer --fieldName Year --notNull 
 field number --type java.lang.Integer --fieldName yearr --notNull 
+exit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-20 04:20:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-20 04:24:25
+json add --class ~.model.Document
+web mvc json add --jsonObject ~.model.Document
+web mvc json add --jsonObject ~.model.Document
+web mvc json add --jsonObject ~.model.Document
+json add --class ~.model.Document
+web mvc json add --jsonObject ~.model.Document
+web mvc json add --jsonObject ~.model.Document
+json add --class ~.model.Document
+web mvc json all

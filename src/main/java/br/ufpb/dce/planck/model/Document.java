@@ -4,10 +4,14 @@ import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import org.springframework.roo.addon.json.RooJson;
+import org.springframework.roo.addon.web.mvc.controller.json.RooWebJson;
 
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
+@RooJson
+@RooWebJson(jsonObject = Document.class)
 public class Document {
 
     /**
